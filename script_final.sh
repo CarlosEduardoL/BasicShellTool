@@ -18,13 +18,17 @@ do
             ps -ao pcpu,pid,user,comm --sort=-pcpu | head -n 6
         elif echo $opcion | grep -Eq '2'
         then
-            df -Th -Bk
+            df -Th -Bk | grep '/dev/sd'
         elif echo $opcion | grep -Eq '3'
         then
-            echo opcion 3
+            echo porfavor ingrese la ruta del archivo o filesystem
+            read route
+             ls -1Rhs $route | sed -e "s/^ *//" | grep "^[0-9]" | sort -hr | head -n 1
         elif echo $opcion | grep -Eq '4'
         then
-            echo opcion 4
+            free | grep Mem | awk '{ printf("RAM\nEn uso: %iB %.4f%s\nLibre:%iB %.4f%s\nDisponible:%iB %.4f%s\n", $3, $3/$2 * 100.0, "%", $4, $4/$2 * 100.0, "%", $7, $7/$2 * 100.0, "%") }'
+            free | grep Swap | awk '{ printf("Swap\nEn uso: %iB %.4f%s\nLibre:%iB %.4f%s\n", $3, $3/$2 * 100.0, "%", $4, $4/$2 * 100.0, "%") }'
+
         elif echo $opcion | grep -Eq '5'
         then
             echo opcion 5
@@ -34,5 +38,6 @@ do
     else
         echo $opcion no es una opcion valida
     fi
+    read garbage
 done
 
