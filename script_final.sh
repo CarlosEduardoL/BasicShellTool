@@ -1,11 +1,14 @@
 #!/bin/bash
 
-figlet -f mono12.tlf BashTool
+#figlet -f mono12.tlf BashTool
 
 ## COLORES 
 RED='\033[0;31m'	# color rojo
+GREEN='\033[0;32m' 	# color verde
 NC='\033[0m' 		# sin color
 
+echo -e "${GREEN} BASH-TOOL"
+echo -e "${NC}"
 while :
 do
 ## MENU DE OPCIONES 
@@ -33,7 +36,8 @@ do
 
             5) nmcli d wifi;;
 
-	    6) figlet -f mono12.tlf Bye! 
+	    6)  echo -e "${GREEN} Bye!"
+		echo -e "${NC}"
 		exit 1;;
 
 	    *) echo -e "${RED} ERROr >>> $opcion no es una entrada valida" 
